@@ -12,7 +12,7 @@ public struct FretboardView: View {
 	
 	var byStrings: some View {
 		HStack(spacing: 0) {
-			StringView(viewModel: viewModel.stringViewModel(for: nil))
+			FretMarkersView(viewModel: FretMarkersViewModel(fretMarkers: FretMarker.standard))
 				.frame(width: 30)
 			StringView(viewModel: viewModel.stringViewModel(for: .e2))
 			StringView(viewModel: viewModel.stringViewModel(for: .a2))

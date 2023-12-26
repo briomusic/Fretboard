@@ -3,8 +3,7 @@ import SwiftUI
 
 class StringViewModel {
 	var string: FretboardConfiguration.String?
-	var fretMarkers: [FretMarker]
-	var fretColors = [[Color]]()
+	var fretColors = [FingeringColors]()
 	var stringPosition: StringPosition {
 		guard let string else {return .fretNumbers}
 		switch string {
@@ -17,9 +16,8 @@ class StringViewModel {
 		}
 	}
 
-	init(string: FretboardConfiguration.String?, fretMarkers: [FretMarker], fretColors: [[Color]]) {
+	init(string: FretboardConfiguration.String?, fretColors: [FingeringColors]) {
 		self.string = string
-		self.fretMarkers = fretMarkers
 		self.fretColors = fretColors
 	}
 }

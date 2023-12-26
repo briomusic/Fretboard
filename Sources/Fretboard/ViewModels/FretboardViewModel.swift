@@ -10,11 +10,11 @@ public class FretboardViewModel {
 	}
 
 	func stringViewModel(for string: FretboardConfiguration.String?) -> StringViewModel {
-		var fretColors = [[Color]]()
+		var fretColors = [FingeringColors]()
 		if let string,
 		   let colors = fretboard.fingerings[string] {
 			fretColors = colors
 		}
-		return StringViewModel(string: string, fretMarkers: fretMarkers, fretColors: fretColors)
+		return StringViewModel(string: string, fretColors: fretColors)
 	}
 }
