@@ -11,18 +11,86 @@ public struct FretboardConfiguration {
 		case e4
 	}
 
+	let fretCount: Int
 	let fingerings: Dictionary<String, [FingeringColors]>
 	
 	static let mock = FretboardConfiguration(fingerings: [
-		.a2: [FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .clear]), FingeringColors(colors:[.clear, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .blue])],
-		.e4: [FingeringColors(colors:[.clear, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .clear])],
-		.g3: [FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .clear]), FingeringColors(colors:[.clear, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .blue])],
-		.d3: [FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .clear]), FingeringColors(colors:[.clear, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .blue])],
-		.b3: [FingeringColors(colors:[.red, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .clear]), FingeringColors(colors:[.clear, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.clear, .clear])],
-		.e2: [FingeringColors(colors:[.clear, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .blue]), FingeringColors(colors:[.clear, .clear]), FingeringColors(colors:[.red, .clear])]
-	   ])
+		.a2: [FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .clear]),
+			  FingeringColors(colors:[.clear, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .blue])],
+		.e4: [FingeringColors(colors:[.clear, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .clear])],
+		.g3: [FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .clear]),
+			  FingeringColors(colors:[.clear, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .blue])],
+		.d3: [FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .clear]),
+			  FingeringColors(colors:[.clear, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .blue])],
+		.b3: [FingeringColors(colors:[.red, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .clear]),
+			  FingeringColors(colors:[.clear, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.clear, .clear])],
+		.e2: [FingeringColors(colors:[.clear, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .blue]),
+			  FingeringColors(colors:[.clear, .clear]),
+			  FingeringColors(colors:[.red, .clear])]
+	])
 	
-	public init(fingerings: Dictionary<String, [FingeringColors]>) {
+	public init(fretCount: Int = 12, fingerings: Dictionary<String, [FingeringColors]>) {
+		self.fretCount = fretCount
 		self.fingerings = fingerings
 	}
 }

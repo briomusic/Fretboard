@@ -24,7 +24,13 @@ struct FretMarker: Identifiable {
 			FretMarker(id: 8, number: 9),
 			FretMarker(id: 9, number: 0),
 			FretMarker(id: 10, number: 0),
-			FretMarker(id: 11, number: 12)
+			FretMarker(id: 11, number: 12),
+			FretMarker(id: 12, number: 0),
+			FretMarker(id: 13, number: 0),
+			FretMarker(id: 14, number: 15),
+			FretMarker(id: 15, number: 0),
+			FretMarker(id: 16, number: 17),
+			FretMarker(id: 17, number: 0)
 		]
 	}()
 }

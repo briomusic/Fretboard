@@ -5,13 +5,14 @@ public struct FretboardView: View {
 	
 	@State private var zoomFactor = CGFloat(1)
 	@State private var currentAmount = 0.0
-	
+	@State private var finalAmount = 1.0
+
 	public var body: some View {
 		GeometryReader { proxy in
 			ScrollView(.vertical) {
 				byStrings
 					.frame(height: proxy.size.height * zoomFactor)
-					.scaleEffect(x: 1, y: currentAmount + 1)
+					.scaleEffect(x: 1, y: currentAmount + finalAmount)
 			}
 			.gesture(magnification)
 			.onAppear {
@@ -31,13 +32,14 @@ public struct FretboardView: View {
 					zoomFactor += currentAmount
 				}
 				print("amount: \(amount), current: \(currentAmount) zoom: \(zoomFactor)")
+//				finalAmount += currentAmount
 				currentAmount = 0
 			}
 	}
 	
 	var byStrings: some View {
 		HStack(spacing: 0) {
-			FretMarkersView(viewModel: FretMarkersViewModel(fretMarkers: FretMarker.standard))
+			FretMarkersView(viewModel: viewModel.fretMarkersViewModel())
 				.frame(width: 30)
 			StringView(viewModel: viewModel.stringViewModel(for: .e2))
 			StringView(viewModel: viewModel.stringViewModel(for: .a2))
@@ -47,20 +49,7 @@ public struct FretboardView: View {
 			StringView(viewModel: viewModel.stringViewModel(for: .e4))
 		}
 	}
-	
-	// deprecated
-	var byFrets: some View {
-		VStack(spacing: 0) {
-			SaddleView()
-				.frame(height: 5)
-			VStack(spacing: 0) {
-				ForEach(viewModel.fretMarkers, content: { fret in
-					NumberedFretView(fretNumber: fret.number)
-				})
-			}
-		}
-	}
-	
+		
 	public init(viewModel: FretboardViewModel) {
 		self.viewModel = viewModel
 	}
