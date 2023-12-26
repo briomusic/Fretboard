@@ -11,6 +11,7 @@ public struct FretboardView: View {
 			ScrollView(.vertical) {
 				byStrings
 					.frame(height: proxy.size.height * zoomFactor)
+					.scaleEffect(x: 1, y: currentAmount + 1)
 			}
 			.gesture(magnification)
 			.onAppear {
@@ -23,13 +24,13 @@ public struct FretboardView: View {
 		MagnificationGesture()
 			.onChanged { amount in
 				currentAmount = amount - 1
+			}
+			.onEnded { amount in
 				if zoomFactor + currentAmount > viewModel.minZoom,
 				   zoomFactor + currentAmount < viewModel.maxZoom {
 					zoomFactor += currentAmount
 				}
-				print("amount: \(currentAmount) zoom: \(zoomFactor)")
-			}
-			.onEnded { amount in
+				print("amount: \(amount), current: \(currentAmount) zoom: \(zoomFactor)")
 				currentAmount = 0
 			}
 	}
