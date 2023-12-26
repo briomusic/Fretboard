@@ -12,6 +12,21 @@ public struct FretboardView: View {
 		}
 	}
 	
+	var magnification: some Gesture {
+		MagnificationGesture()
+			.onChanged { amount in
+				currentAmount = amount - 1
+				if zoomFactor + currentAmount > viewModel.minZoom,
+				   zoomFactor + currentAmount < viewModel.maxZoom {
+					zoomFactor += currentAmount
+				}
+				print("amount: \(currentAmount) zoom: \(zoomFactor)")
+			}
+			.onEnded { amount in
+				currentAmount = 0
+			}
+	}
+	
 	func byStrings(proxy: GeometryProxy) -> some View {
 		ScrollView {
 			HStack(spacing: 0) {
@@ -25,20 +40,7 @@ public struct FretboardView: View {
 				StringView(viewModel: viewModel.stringViewModel(for: .e4))
 			}
 			.frame(height: proxy.size.height * zoomFactor)
-			.gesture(
-				MagnificationGesture()
-					.onChanged { amount in
-						currentAmount = amount - 1
-						if zoomFactor + currentAmount > viewModel.minZoom,
-						   zoomFactor + currentAmount < viewModel.maxZoom {
-							zoomFactor += currentAmount
-						}
-						print("amount: \(currentAmount) zoom: \(zoomFactor)")
-					}
-					.onEnded { amount in
-						currentAmount = 0
-					}
-			)
+			.gesture(magnification)
 			.onAppear {
 				UIScrollView.appearance().bounces = false
 			}
