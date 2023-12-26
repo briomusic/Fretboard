@@ -5,45 +5,42 @@ public struct FretboardView: View {
 	
 	@State private var zoomFactor = CGFloat(1)
 	@State private var currentAmount = 0.0
-
-    public var body: some View {
-		GeometryReader { proxy in
-//			byFrets
-			byStrings
-		}
-    }
 	
-	var byStrings: some View {
+	public var body: some View {
 		GeometryReader { proxy in
-			ScrollView {
-				HStack(spacing: 0) {
-					FretMarkersView(viewModel: FretMarkersViewModel(fretMarkers: FretMarker.standard))
-						.frame(width: 30)
-					StringView(viewModel: viewModel.stringViewModel(for: .e2))
-					StringView(viewModel: viewModel.stringViewModel(for: .a2))
-					StringView(viewModel: viewModel.stringViewModel(for: .d3))
-					StringView(viewModel: viewModel.stringViewModel(for: .g3))
-					StringView(viewModel: viewModel.stringViewModel(for: .b3))
-					StringView(viewModel: viewModel.stringViewModel(for: .e4))
-				}
-				.frame(height: proxy.size.height * zoomFactor)
-				.gesture(
-					MagnificationGesture()
-						.onChanged { amount in
-							currentAmount = amount - 1
-							if zoomFactor + currentAmount > viewModel.minZoom,
-							   zoomFactor + currentAmount < viewModel.maxZoom {
-								zoomFactor += currentAmount
-							}
-							print("amount: \(currentAmount) zoom: \(zoomFactor)")
+			byStrings(proxy: proxy)
+		}
+	}
+	
+	func byStrings(proxy: GeometryProxy) -> some View {
+		ScrollView {
+			HStack(spacing: 0) {
+				FretMarkersView(viewModel: FretMarkersViewModel(fretMarkers: FretMarker.standard))
+					.frame(width: 30)
+				StringView(viewModel: viewModel.stringViewModel(for: .e2))
+				StringView(viewModel: viewModel.stringViewModel(for: .a2))
+				StringView(viewModel: viewModel.stringViewModel(for: .d3))
+				StringView(viewModel: viewModel.stringViewModel(for: .g3))
+				StringView(viewModel: viewModel.stringViewModel(for: .b3))
+				StringView(viewModel: viewModel.stringViewModel(for: .e4))
+			}
+			.frame(height: proxy.size.height * zoomFactor)
+			.gesture(
+				MagnificationGesture()
+					.onChanged { amount in
+						currentAmount = amount - 1
+						if zoomFactor + currentAmount > viewModel.minZoom,
+						   zoomFactor + currentAmount < viewModel.maxZoom {
+							zoomFactor += currentAmount
 						}
-						.onEnded { amount in
-							currentAmount = 0
-						}
-				)
-				.onAppear {
-					UIScrollView.appearance().bounces = false
-				}
+						print("amount: \(currentAmount) zoom: \(zoomFactor)")
+					}
+					.onEnded { amount in
+						currentAmount = 0
+					}
+			)
+			.onAppear {
+				UIScrollView.appearance().bounces = false
 			}
 		}
 	}
