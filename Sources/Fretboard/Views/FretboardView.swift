@@ -8,7 +8,14 @@ public struct FretboardView: View {
 	
 	public var body: some View {
 		GeometryReader { proxy in
-			byStrings(proxy: proxy)
+			ScrollView(.vertical) {
+				byStrings
+					.frame(height: proxy.size.height * zoomFactor)
+			}
+			.gesture(magnification)
+			.onAppear {
+				UIScrollView.appearance().bounces = false
+			}
 		}
 	}
 	
@@ -27,23 +34,16 @@ public struct FretboardView: View {
 			}
 	}
 	
-	func byStrings(proxy: GeometryProxy) -> some View {
-		ScrollView {
-			HStack(spacing: 0) {
-				FretMarkersView(viewModel: FretMarkersViewModel(fretMarkers: FretMarker.standard))
-					.frame(width: 30)
-				StringView(viewModel: viewModel.stringViewModel(for: .e2))
-				StringView(viewModel: viewModel.stringViewModel(for: .a2))
-				StringView(viewModel: viewModel.stringViewModel(for: .d3))
-				StringView(viewModel: viewModel.stringViewModel(for: .g3))
-				StringView(viewModel: viewModel.stringViewModel(for: .b3))
-				StringView(viewModel: viewModel.stringViewModel(for: .e4))
-			}
-			.frame(height: proxy.size.height * zoomFactor)
-			.gesture(magnification)
-			.onAppear {
-				UIScrollView.appearance().bounces = false
-			}
+	var byStrings: some View {
+		HStack(spacing: 0) {
+			FretMarkersView(viewModel: FretMarkersViewModel(fretMarkers: FretMarker.standard))
+				.frame(width: 30)
+			StringView(viewModel: viewModel.stringViewModel(for: .e2))
+			StringView(viewModel: viewModel.stringViewModel(for: .a2))
+			StringView(viewModel: viewModel.stringViewModel(for: .d3))
+			StringView(viewModel: viewModel.stringViewModel(for: .g3))
+			StringView(viewModel: viewModel.stringViewModel(for: .b3))
+			StringView(viewModel: viewModel.stringViewModel(for: .e4))
 		}
 	}
 	
